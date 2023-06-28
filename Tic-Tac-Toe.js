@@ -1,3 +1,4 @@
+(() => {
 // player object to build both player characters, returning respective pieces.
 const player = (name, playerNum) => {
     let playerPiece = playerNum == 1 ? "X" : "O";
@@ -33,16 +34,21 @@ const gameBoard = () => {
     const placePiece = (actor, square) => {
         for(let i = 0; i < _board.length; i++){
             for(let j = 0; j < _board[i].length; j++){
-                if(_board[i][j] == 'X' || _board[i][j] =='O'){
-                    console.log("Invalid move...");
-                    return false;
-                }
                 if(_board[i][j] == square){
-                    _board[i][j] = actor.playerPiece;
-                    return true;
+                   if(_board[i][j] != 'X' && _board[i][j] !='O'){
+                        _board[i][j] = actor.playerPiece;
+                        return true;
+                    }
+                    else{
+                        console.log("Invalid move...");
+                        return false;
+                    } 
                 }
             }
         }
+        
+        console.log("Invalid move...");
+        return false;
     }
 
     // check for a winner of the game and display who won
@@ -51,11 +57,9 @@ const gameBoard = () => {
         for(let i = 0; i < _board.length; i++){
             if(_board[i].every((sq) => sq == 'X')){
                 Player1.winner = true;
-                return Player1.winner;
             }
             else if(_board[i].every((sq) => sq == 'O')){
                 Player2.winner = true;
-                return Player2.winner;
             }
         }
 
@@ -63,11 +67,9 @@ const gameBoard = () => {
         for(let i = 0; i < 3; i++){
             if(_board[0][i] == 'X' && _board[1][i] == 'X' && _board[2][i] == 'X'){
                 Player1.winner = true;
-                return Player1.winner;
             }
             else if(_board[0][i] == 'O' && _board[1][i] == 'O' && _board[2][i] == 'O'){
                 Player2.winner = true;
-                return Player2.winner;
             }
         }
 
@@ -75,12 +77,10 @@ const gameBoard = () => {
         if((_board[0][0] == 'X' && _board[1][1] == 'X' && _board[2][2] == 'X') ||
         (_board[0][2] == 'X' && _board[1][1] == 'X' && _board[2][0] == 'X')){
             Player1.winner = true;
-            return Player1.winner;
         }
         else if((_board[0][0] == 'O' && _board[1][1] == 'O' && _board[2][2] == 'O') ||
         (_board[0][2] == 'O' && _board[1][1] == 'O' && _board[2][0] == 'O')){
             Player2.winner = true;
-            return Player2.winner;
         }
     }
 
@@ -90,54 +90,37 @@ const gameBoard = () => {
 
 const gameSystem = (player1, player2, board) => {
     let count = 0;
-    let winner = false;
 
-    while(!winner){
+    while(player1.winner === false && player2.winner === false && count < 9){
         board.getBoard();
 
         if((count % 2) == 0){
-            let move = parseInt(prompt(player1.name + " enter a square (1-9):"));
+            let movePlayer1 = prompt(player1.name + " enter a square (1-9):");
 
-            if(move < 1 || move > 9){
-                console.log(player1.name + " enter valid number 1-9");
+            let confirmPlayer1 = board.placePiece(player1, movePlayer1);
+
+            if(!confirmPlayer1){
                 continue;
             }
 
-            let confirm1 = true;
-            
-            confirm1 = board.placePiece(player1, move);
-
-            if(!confirm){
-                continue;
-            }
+            count+=1;
         }
         else if((count % 2) == 1){
-            let move = parseInt(prompt(player2.name + " enter a square (1-9):"));
+            let movePlayer2 = prompt(player2.name + " enter a square (1-9):");
 
-            if(move < 1 || move > 9){
-                console.log(player2.name + " enter valid number 1-9");
+            let confirmPlayer2 = board.placePiece(player2, movePlayer2);
+
+            if(!confirmPlayer2){
                 continue;
             }
 
-            let confirm2 = true;
-            
-            confirm2 = board.placePiece(player2, move);
-
-            if(!confirm){
-                continue;
-            }
+            count+=1;
         }
 
-        winner = board.checkWinner(player1, player2);
-
-        count+=1;
-        
-        if(count == 8){
-            break;
-        }
-
-        board.getBoard();
+        board.checkWinner(player1, player2);
     }
+
+    board.getBoard();
 
     if(player1.winner == true){
         console.log(player1.name + " wins!");
@@ -155,16 +138,4 @@ let secondPlayer = player("beta", 2);
 let board = gameBoard();
 
 gameSystem(newPlayer, secondPlayer, board);
-
-
-// let newPlayer = player("a", 1)
-// let secondPlayer = player("b", 2)
-// let board = gameBoard();
-
-// board.getBoard()
-// board.placePiece(newPlayer,'9')
-// board.placePiece(secondPlayer,'9')
-// board.placePiece(newPlayer,'6')
-// board.getBoard()
-// board.resetBoard()
-// board.getBoard()
+})();
