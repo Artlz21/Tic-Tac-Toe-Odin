@@ -137,5 +137,5 @@ let newPlayer = player("alpha", 1);
 let secondPlayer = player("beta", 2);
 let board = gameBoard();
 
-gameSystem(newPlayer, secondPlayer, board);
+// gameSystem(newPlayer, secondPlayer, board);
 })();
