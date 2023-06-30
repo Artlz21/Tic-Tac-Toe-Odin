@@ -1,10 +1,17 @@
 (() => {
 // player object to build both player characters, returning respective pieces.
-const player = (name, playerNum) => {
-    let playerPiece = playerNum == 1 ? "X" : "O";
+// const player = (name, playerNum) => {
+//     let playerPiece = playerNum == 1 ? "X" : "O";
+//     let winner = false;
+
+//     return{ name, playerPiece, playerNum, winner };
+// }
+
+const player = (name, playerIcon) => {
+    let playerPiece = playerIcon
     let winner = false;
 
-    return{ name, playerPiece, playerNum, winner };
+    return{ name, playerPiece, winner };
 }
 
 // Game _board object that builds, returns, and rests.
@@ -133,9 +140,12 @@ const gameSystem = (player1, player2, board) => {
     }
 }
 
-let newPlayer = player("alpha", 1);
-let secondPlayer = player("beta", 2);
-let board = gameBoard();
+let player1Icon = document.querySelector("#player-1-icon");
+let player2Icon = document.querySelector("#player-2-icon");
+
+// let newPlayer = player("alpha", 1);
+// let secondPlayer = player("beta", 2);
+// let board = gameBoard();
 
 // gameSystem(newPlayer, secondPlayer, board);
 })();
