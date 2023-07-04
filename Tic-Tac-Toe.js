@@ -8,10 +8,14 @@
     // }
 
     const player = (name, playerIcon) => {
-        let playerPiece = playerIcon
-        let winner = false;
-
-        return{ name, playerPiece, winner };
+        return{ 
+            name: name,
+            playerIcon: playerIcon,
+            placeIcon: function(){
+                return playerIcon.cloneNode(true);
+            }, 
+            winner: false
+        };
     }
 
     // Game _board object that builds, returns, and rests.
@@ -46,31 +50,31 @@
         const checkWinner = (Player1, Player2) => {
             // loops through the rows of the _board checking if any are full
             for(let i = 0; i < _board.length; i++){
-                if(_board[i].every((sq) => sq == 'X')){
+                if(_board[i].every((sq) => sq == Player1.playerIcon)){
                     Player1.winner = true;
                 }
-                else if(_board[i].every((sq) => sq == 'O')){
+                else if(_board[i].every((sq) => sq == Player2.placeIcon)){
                     Player2.winner = true;
                 }
             }
 
             // loop through the columns of _board to see if they match
             for(let i = 0; i < 3; i++){
-                if(_board[0][i] == 'X' && _board[1][i] == 'X' && _board[2][i] == 'X'){
+                if(_board[0][i] == Player1.playerIcon && _board[1][i] == Player1.playerIcon && _board[2][i] == Player1.playerIcon){
                     Player1.winner = true;
                 }
-                else if(_board[0][i] == 'O' && _board[1][i] == 'O' && _board[2][i] == 'O'){
+                else if(_board[0][i] == Player2.placeIcon && _board[1][i] == Player2.placeIcon && _board[2][i] == Player2.placeIcon){
                     Player2.winner = true;
                 }
             }
 
             // check both diagonals for a winner 
-            if((_board[0][0] == 'X' && _board[1][1] == 'X' && _board[2][2] == 'X') ||
-            (_board[0][2] == 'X' && _board[1][1] == 'X' && _board[2][0] == 'X')){
+            if((_board[0][0] == Player1.playerIcon && _board[1][1] == Player1.playerIcon && _board[2][2] == Player1.playerIcon) ||
+            (_board[0][2] == Player1.playerIcon && _board[1][1] == Player1.playerIcon && _board[2][0] == Player1.playerIcon)){
                 Player1.winner = true;
             }
-            else if((_board[0][0] == 'O' && _board[1][1] == 'O' && _board[2][2] == 'O') ||
-            (_board[0][2] == 'O' && _board[1][1] == 'O' && _board[2][0] == 'O')){
+            else if((_board[0][0] == Player2.placeIcon && _board[1][1] == Player2.placeIcon && _board[2][2] == Player2.placeIcon) ||
+            (_board[0][2] == Player2.placeIcon && _board[1][1] == Player2.placeIcon && _board[2][0] == Player2.placeIcon)){
                 Player2.winner = true;
             }
         }
@@ -127,14 +131,42 @@
     let player1Icon = document.querySelector("#player-1-icon");
     let player2Icon = document.querySelector("#player-2-icon");
 
-    const addEvents = () => {
-        
+    let clone1 = player1Icon.cloneNode(true);
+    let clone2 = player2Icon.cloneNode(true);
+  
+    let rows = document.getElementsByClassName("row boxes");
+
+    const addClickEvents = (player) => {
+        for(let i = 0; i < 3; i++){
+            let leftBox = rows[i].querySelector(".left");
+            let midBox = rows[i].querySelector(".mid");
+            let rightBox = rows[i].querySelector(".right");
+
+            leftBox.addEventListener("click", () => {
+                
+                leftBox.innerHTML = "";
+                leftBox.appendChild(player.placeIcon());
+            })
+
+            midBox.addEventListener("click", () => {
+                
+                midBox.innerHTML = "";
+                midBox.appendChild(player.placeIcon());
+            })
+
+            rightBox.addEventListener("click", () => {
+                
+                rightBox.innerHTML = "";
+                rightBox.appendChild(player.placeIcon());
+            })
+        }
     }
 
-
-    // let newPlayer = player("alpha", 1);
-    // let secondPlayer = player("beta", 2);
-    // let board = gameBoard();
+    let newPlayer = player("alpha", clone1);
+    let secondPlayer = player("beta", clone2);
+  // let board = gameBoard();
 
     // gameSystem(newPlayer, secondPlayer, board);
+
+    addClickEvents(secondPlayer);
 })();
