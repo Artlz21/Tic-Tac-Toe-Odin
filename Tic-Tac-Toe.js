@@ -19,7 +19,7 @@
     }
 
     // Game _board object that builds, returns, and rests.
-    const gameBoard = (function() {
+    const gameBoard = () => {
         let _board = [
             ['1','2','3'],
             ['4','5','6'],
@@ -81,7 +81,7 @@
 
         // return the methods that will be used 
         return { getBoard, resetBoard, placePiece, checkWinner }
-    })();
+    };
 
     const gameSystem = (player1, player2, board) => {
         let turn = 0;
@@ -89,27 +89,17 @@
         while(player1.winner === false && player2.winner === false && turn < 9){
             board.getBoard();
 
+            addClickEvents(player1);
+
             if((turn % 2) == 0){
-                let movePlayer1 = prompt(player1.name + " enter a square (1-9):");
-
-                let confirmPlayer1 = board.placePiece(player1, movePlayer1);
-
-                if(!confirmPlayer1){
-                    continue;
-                }
+                addClickEvents(player1);
 
                 turn+=1;
             }
             else if((turn % 2) == 1){
-                let movePlayer2 = prompt(player2.name + " enter a square (1-9):");
+                addClickEvents(player2)
 
-                let confirmPlayer2 = board.placePiece(player2, movePlayer2);
-
-                if(!confirmPlayer2){
-                    continue;
-                }
-
-                count+=1;
+                turn+=1;
             }
 
             board.checkWinner(player1, player2);
@@ -164,9 +154,7 @@
 
     let newPlayer = player("alpha", clone1);
     let secondPlayer = player("beta", clone2);
-  // let board = gameBoard();
+    let board = gameBoard();
 
-    // gameSystem(newPlayer, secondPlayer, board);
-
-    addClickEvents(secondPlayer);
+    gameSystem(newPlayer, secondPlayer, board);
 })();
