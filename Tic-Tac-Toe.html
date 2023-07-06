@@ -2,64 +2,41 @@
 <html lang="en">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="Tic-Tac-Toe.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
 </head>
 
 <body>
-    <div class="container text-center mt-5">
-        <h1>Tic Tac Toe</h1>
+    <div class="container">
+        <h1 class="title">Tic Tac Toe</h1>
 
-        <div class="row justify-content-center mt-4">
-            <div class="col-lg-4">
-                <div class="row">
-                    <div id="top-left" class="col-4 border text-center py-4" style="border-left: none !important; border-top: none !important;">
-                        <div id="top-left-box" data-x="0" data-y="0" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                    <div id="top-center" class="col-4 border text-center py-4" style="border-top: none !important;">
-                        <div id="top-center-box" data-x="0" data-y="1" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                    <div id="top-right" class="col-4 border text-center py-4" style="border-right: none !important; border-top: none !important;">
-                        <div id="top-right-box" data-x="0" data-y="2" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="middle-left" class="col-4 border text-center py-4" style="border-left: none !important;">
-                        <div id="middle-left-box" data-x="1" data-y="0" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                    <div id="middle-center" class="col-4 border text-center py-4">
-                        <div id="middle-center-box" data-x="1" data-y="1" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                    <div id="middle-right" class="col-4 border text-center py-4" style="border-right: none !important;">
-                        <div id="middle-right-box" data-x="1" data-y="2" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="bottom-left" class="col-4 border text-center py-4" style="border-left: none !important; border-bottom: none !important;">
-                        <div id="bottom-left-box" data-x="2" data-y="0" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                    <div id="bottom-center" class="col-4 border text-center py-4" style="border-bottom: none !important;">
-                        <div id="bottom-center-box" data-x="2" data-y="1" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                    <div id="bottom-right" class="col-4 border text-center py-4" style="border-right: none !important; border-bottom: none !important;">
-                        <div id="bottom-right-box" data-x="2" data-y="2" style="height: 50px; width: 50px; margin-left: 20px;"></div>
-                    </div>
-                </div>
+        <div class="game-container">
+            <div class="board">
+                <div class="board-box" data-x="0" data-y="0">box</div>
+                <div class="board-box" data-x="0" data-y="1">box</div>
+                <div class="board-box" data-x="0" data-y="2">box</div>
+                <div class="board-box" data-x="1" data-y="0">box</div>
+                <div class="board-box" data-x="1" data-y="1">box</div>
+                <div class="board-box" data-x="1" data-y="2">box</div>
+                <div class="board-box" data-x="2" data-y="0">box</div>
+                <div class="board-box" data-x="2" data-y="1">box</div>
+                <div class="board-box" data-x="2" data-y="2">box</div>
             </div>
         </div>
-
-        <div class="d-flex justify-content-evenly mt-5">
+        
+        <div class="bottom-row">
             <div>
-                <img id="player-1-icon" src="Screenshot 2023-06-29 172138.png" alt="X" style="border-radius: 25px; height: 50px;">
-                <h3 id="player-1-name">Name</h3>
+                <img src="Screenshot 2023-06-29 171157.png" alt="player1" class="playerIcon">
+                <p>Player 1</p>
             </div>
-
             <div>
-                <img id="player-2-icon" src="Screenshot 2023-06-29 171157.png" alt="O" style="border-radius: 25px; height: 50px;">
-                <h3 id="player-2-name">Name</h3>
+                <img src="Screenshot 2023-06-29 172138.png" alt="player2" class="playerIcon">
+                <p>Player 2</p>
             </div>
         </div>
     </div>
+    
 </body>
 </html>
